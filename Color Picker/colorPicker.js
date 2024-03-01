@@ -3,7 +3,7 @@ const colors = ['green','red','blue']
 const color = document.querySelector(".color");
 
 const getRandomNumber = () => {
-    let randomNumber = Math.floor(Math.random() * colors.length)
+    let randomNumber = Math.floor((Math.random() * colors.length)+1)
     return randomNumber
 }
 btn.addEventListener('click', () =>{
