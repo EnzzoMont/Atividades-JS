@@ -49,10 +49,10 @@ const btn1 = document.querySelector('button')
 const listaFilmes = document.querySelector('#listaFilmes')
 
 /*
-Renderiza a lista de filmes na tela
+Ao carregar a página, executa a função que renderiza os elementos na tela
 */
 
-window.onload = ()=>{
+window.onload = () => {
    renderizarLista()
 }
 
@@ -107,6 +107,10 @@ btn1.addEventListener('click',()=>{
     inputUsuario.value = ''
 })
 
+/*
+Função que é executada quando o botão de favorito é clicado
+*/
+
 const favoritoClicado = (eventoDeClique, objetoFilme) => {
     /*adiciona um objeto com a propriedade favorito e não favorito,
     e seus valores são os caminhos da imagem*/
@@ -128,6 +132,10 @@ const favoritoClicado = (eventoDeClique, objetoFilme) => {
 
 }
 
+/*
+Função executada para salvar o filme no localStorage
+*/
+
 const saveToLocalStorage = (objetoFilme) => {
     //checa se já existe um campo de favoritos no LocalStorage
     //se houver, ele salva no array filmesFavoritos
@@ -141,6 +149,10 @@ const saveToLocalStorage = (objetoFilme) => {
     //Salva no localStorage
     localStorage.setItem('favoritos', moviesJSON)
 }
+
+/*
+Função executada para remover o filme no localStorage
+*/
 
 function removeFromLocalStorage(id) {
      //checa se já existe um campo de favoritos no LocalStorage
