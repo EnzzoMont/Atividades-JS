@@ -1,18 +1,82 @@
+/*
+Criando a base de dados de filmes  
+*/
+
+const filmes = [
+    {
+    nome: 'Harry Potter',
+    genero: 'fantasia',
+    lancamento: 2001
+    },
+    {
+    nome: 'Avatar',
+    genero: 'fantasia',
+    lancamento: 2010
+    },
+    {
+     nome:'O senhor dos Anéis',
+     genero: 'fantasia',
+     lancamento: 2000
+    },
+    {
+     nome: 'Branquelas',
+     genero: 'comédia',
+     lancamento: 2007
+    },
+    {
+     nome: 'A Lagoa Azul',
+     genero: 'romance',
+     lancamento: 1983
+}]
+
+/*
+Pegando Elementos HTML
+*/
+
 //pega o elemento button
 const btn1 = document.querySelector('button')
 //pega a lista de filmes
 const listaFilmes = document.querySelector('#listaFilmes')
 
-//adiciona o evento de clique ao botão
+/*
+Renderiza a lista de filmes na tela
+*/
+
+window.onload = ()=>{
+   renderizarLista()
+}
+
+/*
+Função para renderizar filmes na tela
+*/
+
+
+const renderizarLista = () =>{
+    //limpa a tela antes de renderizar
+    listaFilmes.innerHTML = ""
+    //percorre o array de filmes, inserindo um li com o nome do filme a cada volta do loop
+    filmes.forEach((filme)=>{
+        const itemLista = document.createElement('li')
+        //adiciona o li à lista de filmes
+        listaFilmes.append(itemLista)
+        //adiciona o filme que o usuário digitou à lista
+        itemLista.innerHTML = `Meu filme ${filme.nome}`
+    })
+}
+
+/*
+Adiciona o evento de clique ao botão 
+*/
+
 btn1.addEventListener('click',()=>{
     //pega o input onde o usuário digita o filme
-    const inputUsuario = document.querySelector('#filmeInput').value
-    //cria um novo <li>
-    const itemLista = document.createElement('li')
-    //adiciona o li à lista de filmes
-    listaFilmes.append(itemLista)
-    //adiciona o filme que o usuário digitou à lista
-    itemLista.innerHTML = `Meu filme ${inputUsuario}`
+    const inputUsuario = document.querySelector('#filmeInput')
+    //adiciona o valor à propriedade nome do objeto dentro do array filmes
+    filmes.push({nome: inputUsuario.value, genero: '', lancamento: ''})
+    //renderiza a lista novamente
+    renderizarLista()
+    //apaga o campo de digitação
+    inputUsuario.value = ''
 })
 
 /*
