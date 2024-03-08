@@ -30,6 +30,11 @@ const filmes = [
 }]
 
 /*
+Criando um array de filmes favoritos
+*/
+let filmesFavoritos = []
+
+/*
 Pegando Elementos HTML
 */
 
@@ -61,6 +66,8 @@ const renderizarLista = () =>{
         listaFilmes.append(itemLista)
         //adiciona o filme que o usuário digitou à lista
         itemLista.innerHTML = `Meu filme ${filme.nome}`
+
+        
         //cria uma nova imagem
         const favorito = document.createElement('img')
         //adiciona imagem ao item img
@@ -68,8 +75,8 @@ const renderizarLista = () =>{
         //muda o cursor da imagem para mãozinha de clique
         favorito.style.cursor = 'pointer'
         //adiciona evento de clique à imagem
-        favorito.addEventListener('click',(e)=>{
-            localStorage.setItem('nome',filme.nome)
+        favorito.addEventListener('click',()=>{
+            adicionarItem(filme.nome)
         })
         //adiciona a imagem ao item da lista
         itemLista.append(favorito)
@@ -90,6 +97,23 @@ btn1.addEventListener('click',()=>{
     //apaga o campo de digitação
     inputUsuario.value = ''
 })
+
+const adicionarItem = (nomeDoFilme) => {
+    //checa se já existe um campo de favoritos no LocalStorage
+    //se houver, ele salva no array filmesFavoritos
+    if(localStorage.getItem('favoritos')){
+        filmesFavoritos = JSON.parse(localStorage.getItem('favoritos'));
+    }
+    //adiciona o nome do Filme ao array filmesFavoritos
+    filmesFavoritos.push(nomeDoFilme)
+    //transforma o array em string para poder salvar no LocalStorage
+    const moviesJSON = JSON.stringify(filmesFavoritos)
+    //Salva no localStorage
+    localStorage.setItem('favoritos', moviesJSON)
+
+
+}
+
 
 /*
 Existem outras ações para manipular o DOM como:
