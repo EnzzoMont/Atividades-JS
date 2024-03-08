@@ -6,27 +6,32 @@ const filmes = [
     {
     nome: 'Harry Potter',
     genero: 'fantasia',
-    lancamento: 2001
+    lancamento: 2001,
+    isFavorite:false
     },
     {
     nome: 'Avatar',
     genero: 'fantasia',
-    lancamento: 2010
+    lancamento: 2010,
+    isFavorite:false
     },
     {
      nome:'O senhor dos Anéis',
      genero: 'fantasia',
-     lancamento: 2000
+     lancamento: 2000,
+     isFavorite:false
     },
     {
      nome: 'Branquelas',
      genero: 'comédia',
-     lancamento: 2007
+     lancamento: 2007,
+     isFavorite:false
     },
     {
      nome: 'A Lagoa Azul',
      genero: 'romance',
-     lancamento: 1983
+     lancamento: 1983,
+     isFavorite:false
 }]
 
 /*
@@ -75,8 +80,8 @@ const renderizarLista = () =>{
         //muda o cursor da imagem para mãozinha de clique
         favorito.style.cursor = 'pointer'
         //adiciona evento de clique à imagem
-        favorito.addEventListener('click',()=>{
-            adicionarItem(filme.nome)
+        favorito.addEventListener('click',(e)=>{
+            favoritoClicado(e,filme)
         })
         //adiciona a imagem ao item da lista
         itemLista.append(favorito)
@@ -98,20 +103,36 @@ btn1.addEventListener('click',()=>{
     inputUsuario.value = ''
 })
 
-const adicionarItem = (nomeDoFilme) => {
+const favoritoClicado = (eventoDeClique, objetoFilme) => {
+    const favoriteState = {
+        favorited: 'img/heart-fill.svg',
+        notFavorited: 'img/heart.svg'
+      }
+
+      if(eventoDeClique.target.src.includes(favoriteState.notFavorited)) {
+        // aqui ele será favoritado
+        eventoDeClique.target.src = favoriteState.favorited
+        //saveToLocalStorage(objetoFilme)
+      } else {
+        // aqui ele será desfavoritado
+        eventoDeClique.target.src = favoriteState.notFavorited
+        //removeFromLocalStorage(objetoFilme.id)
+      }
+
+}
+
+const saveToLocalStorage = (objetoFilme) => {
     //checa se já existe um campo de favoritos no LocalStorage
     //se houver, ele salva no array filmesFavoritos
     if(localStorage.getItem('favoritos')){
         filmesFavoritos = JSON.parse(localStorage.getItem('favoritos'));
     }
     //adiciona o nome do Filme ao array filmesFavoritos
-    filmesFavoritos.push(nomeDoFilme)
+    filmesFavoritos.push(objetoFilme.nome)
     //transforma o array em string para poder salvar no LocalStorage
     const moviesJSON = JSON.stringify(filmesFavoritos)
     //Salva no localStorage
     localStorage.setItem('favoritos', moviesJSON)
-
-
 }
 
 
