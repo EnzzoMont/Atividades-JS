@@ -164,8 +164,10 @@ function removeFromLocalStorage(id) {
     const procurarFilme = filmesFavoritos.find(movie => movie.id === id)
     //filtra todos os filmes que tem o id diferente do que foi encontrado e gera um novo array
     const filmesFiltrados = filmesFavoritos.filter(movie => movie.id != procurarFilme.id)
+    //transforma o array em string para poder salvar no LocalStorage
+    const filmesFiltradosJSON = JSON.stringify(filmesFiltrados)
     //guarda esse novo array no localStorage
-    localStorage.setItem('favoritos', JSON.stringify(filmesFiltrados))
+    localStorage.setItem('favoritos', filmesFiltradosJSON)
   }
 
 
